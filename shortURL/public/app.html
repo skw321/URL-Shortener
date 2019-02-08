@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>short URL</h1>
+    <input id='input'></input>
+    <button onclick="clickHandler()">click me</button>
+    <p id='shortURL'></p>
+    <script>
+        function clickHandler() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    document.getElementById("shortURL").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("POST", "http://localhost:8080/shortURL", true);
+            xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhttp.send("url=" + document.getElementById('input').value);
+        }
+    </script>
+</body>
+
+</html>
